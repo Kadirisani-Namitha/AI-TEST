@@ -1,21 +1,23 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Prompt Processor</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
+
 <body class="bg-light">
   <div class="container mt-5">
     <h1 class="mb-4">Enter a Prompt</h1>
-    <form id="promptForm">
+    <form id="promptForm" onsubmit="return false;">
       <div class="mb-3">
         <input type="text" id="promptInput" class="form-control" placeholder="e.g. Create a robot with wings" required />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
     </form>
+
     <hr>
     <div id="result" class="mt-4"></div>
   </div>
@@ -46,16 +48,17 @@
             <a href="${data["3d_model"]}" target="_blank">${data["3d_model"]}</a>
             <h5>Memory:</h5>
             <ul>
-              ${(data.memory || []).map(p => <li>${p}</li>).join('')}
+              ${(data.memory || []).map(p => `<li>${p}</li>`).join('')}
             </ul>
           `;
         } else {
-          document.getElementById("result").innerHTML = <p class="text-danger">${data.detail}</p>;
+          document.getElementById("result").innerHTML = `<p class="text-danger">${data.detail}</p>`;
         }
       } catch (error) {
-        document.getElementById("result").innerHTML = <p class="text-danger">Error: ${error.message}</p>;
+        document.getElementById("result").innerHTML = `<p class="text-danger">Error: ${error.message}</p>`;
       }
     });
   </script>
 </body>
+
 </html>
